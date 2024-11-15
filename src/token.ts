@@ -25,8 +25,8 @@ export class EventListener implements IEventListener {
         if (!(event.schema_id in this._listeners)) {
           return;
         }
-        let listeners = this._listeners[event.schema_id];
-        for (let listener of listeners) {
+        const listeners = this._listeners[event.schema_id];
+        for (const listener of listeners) {
           await listener(manager, event.schema_id, event);
         }
       }

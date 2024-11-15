@@ -13,7 +13,7 @@ Once this extension is installed, another extension can consume the `IEventListe
 Below is a basic example of a plugin that "listens" to Kernel Action events from Jupyter Server and shows a toast notification in the UI.
 
 ```typescript
-import { 
+import {
   Notification
 } from '@jupyterlab/apputils';
 
@@ -38,7 +38,7 @@ async function kernelEventListener(manager, schemaId, event: Event.Emission) => 
     // Show a notification
     let message `The ${kernel_name} kernel with ID ${kernel_id} action ${action} has status ${status}.`
     Notification.info(
-        data.msg, 
+        message,
         {
             autoClose: 5000,
         }
@@ -56,13 +56,13 @@ const myPlugin: JupyterFrontEndPlugin<void> = {
     IEventListener
   ],
   activate: async (
-    app: JupyterFrontEnd, 
+    app: JupyterFrontEnd,
     eventListener: IEventListener
   ) => {
 
     eventListener.addListener(
       kernelActionEventSchema,
-      kernelEventListener      
+      kernelEventListener
     );
   }
 };
