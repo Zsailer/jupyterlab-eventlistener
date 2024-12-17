@@ -13,6 +13,7 @@ export interface IListener {
 
 export interface IEventListener {
   addListener(schemaId: string, listener: IListener): void;
+  removeListener(schemaId: string, listener: IListener): void;
 }
 
 export class EventListener implements IEventListener {
