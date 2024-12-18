@@ -37,8 +37,8 @@ artifacts = ["jupyterlab_eventlistener/labextension"]
 exclude = [".github", "binder"]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"jupyterlab_eventlistener/labextension" = "share/jupyter/labextensions/jupyterlab-eventlistener"
-"install.json" = "share/jupyter/labextensions/jupyterlab-eventlistener/install.json"
+"jupyterlab_eventlistener/labextension" = "share/jupyter/labextensions/jupyterlab-eventlistener-extension"
+"install.json" = "share/jupyter/labextensions/jupyterlab-eventlistener-extension/install.json"
 
 [tool.hatch.build.hooks.version]
 path = "jupyterlab_eventlistener/_version.py"
@@ -63,15 +63,24 @@ source_dir = "src"
 build_dir = "jupyterlab_eventlistener/labextension"
 
 [tool.jupyter-releaser.options]
-version_cmd = "hatch version"
+version-cmd = "cd .. && python scripts/bump_version.py --force --skip-if-dirty"
 
 [tool.jupyter-releaser.hooks]
 before-build-npm = [
-    "python -m pip install 'jupyterlab>=4.0.0,<5'",
-    "jlpm",
-    "jlpm build:prod"
+    "YARN_ENABLE_IMMUTABLE_INSTALLS=0 jlpm build:prod"
 ]
-before-build-python = ["jlpm clean:all"]
+before-build-python = [
+    "jlpm clean:all",
+    # Build the assets
+    "jlpm build:prod",
+    # Clean the build artifacts to not include them in sdist
+    "jlpm clean:lib"
+]
+before-bump-version = [
+    "python -m pip install -U jupyterlab tomlkit",
+    "jlpm"
+]
+
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

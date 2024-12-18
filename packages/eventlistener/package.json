@@ -1,0 +1,71 @@
+{
+    "name": "jupyterlab-eventlistener",
+    "version": "0.1.4",
+    "description": "Eventlistener API for JupyterLab.",
+    "keywords": [
+        "jupyter",
+        "jupyterlab",
+        "jupyterlab-extension"
+    ],
+    "homepage": "https://github.com/Zsailer/jupyterlab-eventlistener",
+    "bugs": {
+        "url": "https://github.com/Zsailer/jupyterlab-eventlistener/issues"
+    },
+    "license": "BSD-3-Clause",
+    "author": {
+        "name": "Zach Sailer",
+        "email": "zachsailer@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Zsailer/jupyterlab-eventlistener.git"
+    },
+    "sideEffects": [
+        "style/*.css",
+        "style/index.js"
+    ],
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "style": "style/index.css",
+    "styleModule": "style/index.js",
+    "directories": {
+        "lib": "lib/"
+    },
+    "files": [
+        "lib/*.d.ts",
+        "lib/*.js.map",
+        "lib/*.js",
+        "schema/*.json",
+        "style/*.css",
+        "style/index.js"
+    ],
+    "scripts": {
+        "build": "tsc -b",
+        "build:prod": "jlpm run build",
+        "clean": "rimraf lib tsconfig.tsbuildinfo",
+        "clean:lib": "jlpm run clean:all",
+        "clean:all": "rimraf lib tsconfig.tsbuildinfo node_modules",
+        "install:extension": "jlpm run build",
+        "watch": "tsc -b --watch"
+    },
+    "dependencies": {
+        "@jupyterlab/services": "^7.0.0",
+        "@lumino/coreutils": "^2.1.2"
+    },
+    "devDependencies": {
+        "@jupyterlab/builder": "^4.0.5",
+        "@types/react": "~18.3.1",
+        "npm-run-all": "^4.1.5",
+        "rimraf": "^4.1.2",
+        "typescript": "~5.0.4"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "typedoc": {
+        "entryPoint": "./src/index.ts",
+        "readmeFile": "./README.md",
+        "displayName": "jupyterlab-eventlistener",
+        "tsconfig": "./tsconfig.json"
+    }
+}
