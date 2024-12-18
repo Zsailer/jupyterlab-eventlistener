@@ -1,6 +1,6 @@
 {
     "name": "jupyterlab-eventlistener",
-    "version": "0.1.4",
+    "version": "0.2.0-alpha.0",
     "description": "Eventlistener API for JupyterLab.",
     "keywords": [
         "jupyter",
