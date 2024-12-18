@@ -17,7 +17,7 @@ test('should emit an activation console message', async ({ page }) => {
 
   expect(
     logs.filter(
-      s => s === 'JupyterLab extension jupyterlab-eventlistener is activated!'
+      s => s === 'jupyterlab-eventlistener-extension has been activated!'
     )
   ).toHaveLength(1);
 });

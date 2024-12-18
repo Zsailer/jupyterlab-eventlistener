@@ -1,6 +1,6 @@
 {
     "name": "jupyterlab-eventlistener",
-    "version": "0.2.0",
+    "version": "0.1.4",
     "description": "Eventlistener API for JupyterLab.",
     "keywords": [
         "jupyter",
@@ -15,6 +15,10 @@
     "author": {
         "name": "Zach Sailer",
         "email": "zachsailer@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Zsailer/jupyterlab-eventlistener.git"
     },
     "sideEffects": [
         "style/*.css",

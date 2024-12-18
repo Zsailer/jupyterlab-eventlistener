@@ -23,8 +23,6 @@ const eventlistener: JupyterFrontEndPlugin<EventListener> = {
 /**
  * Export the plugins as default.
  */
-const plugins: JupyterFrontEndPlugin<any>[] = [
-  eventlistener
-];
+const plugins: JupyterFrontEndPlugin<any>[] = [eventlistener];
 
 export default plugins;
