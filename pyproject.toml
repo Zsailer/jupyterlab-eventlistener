@@ -63,7 +63,7 @@ source_dir = "src"
 build_dir = "jupyterlab_eventlistener/labextension"
 
 [tool.jupyter-releaser.options]
-version-cmd = "cd .. && python scripts/bump_version.py --force --skip-if-dirty"
+version-cmd = "python scripts/bump_version.py --force --skip-if-dirty"
 
 [tool.jupyter-releaser.hooks]
 before-build-npm = [

@@ -1,5 +1,6 @@
 {
   "name": "jupyterlab-eventlistener-bundle",
+  "private": true,
   "version": "0.1.4",
   "description": "A JupyterLab Plugin for listening to Jupyter events in the frontend.",
   "keywords": [
