@@ -37,8 +37,8 @@ artifacts = ["jupyterlab_eventlistener/labextension"]
 exclude = [".github", "binder"]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"jupyterlab_eventlistener/labextension" = "share/jupyter/labextensions/jupyterlab-eventlistener"
-"install.json" = "share/jupyter/labextensions/jupyterlab-eventlistener/install.json"
+"jupyterlab_eventlistener/labextension" = "share/jupyter/labextensions/jupyterlab-eventlistener-extension"
+"install.json" = "share/jupyter/labextensions/jupyterlab-eventlistener-extension/install.json"
 
 [tool.hatch.build.hooks.version]
 path = "jupyterlab_eventlistener/_version.py"
@@ -72,6 +72,10 @@ before-build-npm = [
     "jlpm build:prod"
 ]
 before-build-python = ["jlpm clean:all"]
+before-bump-version = [
+    "python -m pip install -U jupyterlab tomlkit",
+    "jlpm"
+]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

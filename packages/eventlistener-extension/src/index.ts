@@ -2,9 +2,9 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-import { IEventListener, EventListener } from './token';
+import { IEventListener, EventListener } from 'jupyterlab-eventlistener';
 
-const PLUGIN_ID = 'jupyterlab-eventlistener';
+const PLUGIN_ID = 'jupyterlab-eventlistener-extension';
 
 const eventlistener: JupyterFrontEndPlugin<EventListener> = {
   id: PLUGIN_ID,
