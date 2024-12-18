@@ -1,6 +1,6 @@
 {
     "name": "jupyterlab-eventlistener-extension",
-    "version": "0.3.0-alpha.0",
+    "version": "0.4.0-alpha.0",
     "description": "JupyterLab Plugin providing a global event listener.",
     "keywords": [
         "jupyter",
@@ -58,7 +58,7 @@
     "dependencies": {
         "@jupyterlab/application": "^4.0.0",
         "@jupyterlab/services": "^7.0.0",
-        "jupyterlab-eventlistener": "^0.3.0-alpha.0"
+        "jupyterlab-eventlistener": "^0.4.0-alpha.0"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.5",
