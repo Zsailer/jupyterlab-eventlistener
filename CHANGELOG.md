@@ -2,11 +2,15 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
-## 0.4.0beta0
+## 0.4.0rc0
 
 No merged PRs
 
 <!-- <END NEW CHANGELOG ENTRY> -->
+
+## 0.4.0beta0
+
+No merged PRs
 
 ## 0.4.0alpha0
 
