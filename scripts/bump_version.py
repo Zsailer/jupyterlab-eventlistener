@@ -5,33 +5,48 @@ import json
 from pathlib import Path
 
 import click
-import tomlkit
+from packaging.version import parse
 from jupyter_releaser.util import get_version, run
-from pkg_resources import parse_version
+
 
 LERNA_CMD = "jlpm run lerna version --no-push --force-publish --no-git-tag-version"
 
 
-def increment_version(current, spec):
-    curr = parse_version(current)
+def increment_version(current: str, spec: str):
+    """
+    current: current version
+    spec: how to increment the version
+    
+    """
+    curr = parse(current)
 
     if spec == "major":
-        spec = f"{curr.major + 1}.0.0.a0"
+        return f"{curr.major + 1}.0.0.a0"
 
     elif spec == "minor":
-        spec = f"{curr.major}.{curr.minor + 1}.0.a0"
+        return f"{curr.major}.{curr.minor + 1}.0.a0"
 
+    elif spec in ["a", "b", "rc"]:
+        # This wasn't a pre-release before.
+        if curr.pre is None:
+            return f"{curr.major}.{curr.minor}.{curr.micro}.a0"
+
+        p = curr.pre[0]
+        # Increment the pre-release number, not the type of pre-release.
+        if p == spec:
+            return f"{curr.major}.{curr.minor}.{curr.micro}.{curr.pre[0]}{curr.pre[1] + 1}"
+        
+        # Reset the pre-release number ot zero if not a pre-release.
+        return f"{curr.major}.{curr.minor}.{curr.micro}.{spec}0"
+
+    # Make a full release. No more pre-tag.
     elif spec == "release":
-        p, x = curr.pre
-        if p == "a":
-            p = "b"
-        elif p == "b":
-            p = "rc"
-        elif p == "rc":
-            p = None
-        suffix = f"{p}0" if p else ""
-        spec = f"{curr.major}.{curr.minor}.{curr.micro}{suffix}"
-
+        # If pre release, drop the pre tag.
+        if curr.pre:
+            return f"{curr.major}.{curr.minor}.{curr.micro}"
+        # Else this is considered a patch release.
+        return f"{curr.major}.{curr.minor}.{curr.micro + 1}"
+    
     elif spec == "next":
         spec = f"{curr.major}.{curr.minor}."
         if curr.pre:
@@ -63,8 +78,9 @@ def bump(force, skip_if_dirty, spec):
             return
         raise Exception("Must be in a clean git state with no untracked files")
 
-    current = get_version()
-    version = parse_version(increment_version(current, spec))
+
+    __version__ = get_version()
+    version = parse(increment_version(__version__, spec))
 
     # convert the Python version
     js_version = f"{version.major}.{version.minor}.{version.micro}"
